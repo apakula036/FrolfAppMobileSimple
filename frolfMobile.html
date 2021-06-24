@@ -98,7 +98,7 @@ function createHoles(numberOfHoles){
         labelForHole.setAttribute("style", "margin-bottom: 0; margin-left: 10px");
         //newContainer.appendChild(labelForHole);
         let newHole = document.createElement("input");
-        newHole.setAttribute("style", "border-color: red; width: 50px; border-width: medium; border-style: solid; margin-left: 16px");
+        newHole.setAttribute("style", "border-color: blue; width: 50px; border-width: medium; border-style: solid; margin-left: 16px");
         newHole.setAttribute("id", i);
         newHole.setAttribute("class", "holescore"); 
         newHole.type = "number";
@@ -332,17 +332,18 @@ function addTotal(){
 <style>
 body{
     font-family: Georgia;
-    font-size: 14px;
+    font-size: 18px;
     background-image: url(https://eagleoutside.com/wp-content/uploads/2015/06/fairgrounds-disc-golf-course.jpg);
     background-size:cover;
 }
 
 
 p{
-    font-size: 17px;
+    font-size: 20px;
 }
 .scorebuttons{
-    width: auto; 
+    width: 100px;
+    height: 40px;
     background-color:ghostwhite;
     border-color: black;
     border-radius: 14px;
@@ -350,19 +351,24 @@ p{
     padding-left: 10px;
     padding-right: 10px;
     margin: 2px;
+    font-size: 18px;
 }
 .scorebuttons:hover {
     background-color:black;
     border-color: black;
     color: white;
     border-width: 3.3px;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
 }
 .holescore{
+    width: 60px;
+    height: 40px;
     margin-left: 10px; 
     font-family: Helvetica;
     border-radius: 4px;
     padding: 5px;
+    text-align: center;
+    font-size: 18px;
 }
 .container-holes{
     font-size: 16px;
