@@ -21,19 +21,50 @@
         <button type ="button" onclick="courseHighland()" class="intro-button-blue" id="highland">Highland</button>
         <button type ="button" onclick="courseTheOaks()" class="intro-button-green" id="theOaks">The Oaks</button>
         <button type ="button" onclick="courseHeritage()" class="intro-button-brown" id="heritage">Heritage</button>
-
-        
     </div> 
+    <div class ="container" style="background-color: rgb(238, 238, 238)" id="bottomDiv">
+        <h3>Previous Rounds:</h3>
+        <div id="previousRounds"></div>
+    </div>
 </body>
 </html>
 
 
 <script>
+displayPreviousRounds();
 function clearApp(){
     let frolfApp = document.getElementById("headerTitle");
     let buttons = document.getElementById("menuButtons");
+    let bottomStuff = document.getElementById("bottomDiv");
     frolfApp.innerHTML = "";
     buttons.innerHTML = "";
+    bottomStuff.innerHTML = "";
+}
+function displayPreviousRounds(){
+    //localStorage.getItem('Round')
+    //console.log("test")
+    console.log(localStorage.getItem('Round'))
+    console.log(localStorage.getItem('Round' + 1))
+    let allScores = "";
+    let previousRoundsDIV = document.getElementById("previousRounds");
+    for(i=1;i<100;i++){
+        if( localStorage.getItem('Round'+ [i]) != null ){
+            console.log("this")
+            //allScores += ("\n" + localStorage.getItem('Round' + [i])+ "\n")
+            let newRound = document.createElement("p");
+            console.log(newRound)
+            newRound.innerHTML = localStorage.getItem('Round' + [i]);
+            console.log(newRound)
+            previousRoundsDIV.appendChild(newRound);
+            //console.log(allScores)
+        }
+        else{
+            //document.getElementById("previousRounds").innerHTML = newRound.innerHTML;
+            return;
+        }
+    }
+    console.log(allScores)
+    document.getElementById("previousRounds").innerHTML = allScores;
 }
 
 function courseDellwood(){
@@ -81,7 +112,6 @@ function courseHeritage(){
     createHoles(18);
     getEndTimerReady();
 }
-
 function createHoles(numberOfHoles){
     let bodyOfPage = document.getElementById("bodyOfPage");
     let newContainer = document.createElement("div");
@@ -116,13 +146,17 @@ function createHoles(numberOfHoles){
                 newHole.setAttribute("style", "border-color: gray; width: 50px"); 
             }
         }
+        //need a function here to save data to something like a json object 
+        //function is added here to each button dynamically and is used on click 
+        //newHole.addEventListener("change", updateStorage(newHole));
+
         //add buttons 
         let boge = document.createElement("button");
         boge.setAttribute("class", "scorebuttons"); 
         boge.setAttribute("style", "background-color: #ff9980"); 
         boge.innerHTML = "+1";
         boge.addEventListener("click", function(){
-            newHole.value++;
+            newHole.value++; 
             addTotal();
             if(newHole.value > 0 ){
                 newHole.setAttribute("style", "border-color: red; width: 50px; margin-left: 16px; background-color: lightred");
@@ -148,7 +182,7 @@ function createHoles(numberOfHoles){
         birdieButt.setAttribute("style", "background-color: #99ff99");
         birdieButt.innerHTML = "-1";
         birdieButt.addEventListener("click", function(){
-            newHole.value--;
+            newHole.value--; 
             addTotal();
             if(newHole.value < 0 ){
                 newHole.setAttribute("style", "margin-left: 16px; border-color: green; width: 50px");
@@ -163,7 +197,6 @@ function createHoles(numberOfHoles){
     newContainer.appendChild(placeHolderForTotal);
     bodyOfPage.appendChild(newContainer);
 }
-
 function createHeader(courseName, sentColor){
     let bodyOfPage = document.getElementById("bodyOfPage");
     //create jumbo
@@ -177,7 +210,6 @@ function createHeader(courseName, sentColor){
     newJumbotronForHeader.appendChild(theNewHeader);
     bodyOfPage.appendChild(newJumbotronForHeader);
 }
-
 function getTimerReady() {
     let bodyOfPage = document.getElementById("bodyOfPage");
     //create div for timer to get characteristics so it matches other text
@@ -278,7 +310,24 @@ function alertTotals(){
         } 
     }
     
-    alert("Start Time: "+document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles);
+    alert("Start Time: " + document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles);
+    saveToStorage()
+
+    function saveToStorage(){
+        //add custom name have user search previous round? 
+        //user adds custom name added to key thing 
+        //for loop to check if round++ exists if it does add 1 if it still exists keep going 
+        for(i=1; i<100; i++){
+            if(localStorage.getItem('Round'+[i]) == null){
+                localStorage.setItem('Round' + [i],
+                "Course: " + decider + "\nStart Time: " + document.getElementById("startTimer").innerHTML)
+                return;
+            }
+            else{
+                console.log("else statement ran adding 1 to loop")
+            }
+        }
+    } //if break its just localstorage.setItem('round', everything here)
 }
 
 function clearBody(){
@@ -325,9 +374,6 @@ function addTotal(){
     }
     
 }
-
-
-
 </script>
 <style>
 body{
@@ -336,8 +382,6 @@ body{
     background-image: url(https://eagleoutside.com/wp-content/uploads/2015/06/fairgrounds-disc-golf-course.jpg);
     background-size:cover;
 }
-
-
 p{
     font-size: 20px;
 }
