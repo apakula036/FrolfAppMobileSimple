@@ -25,6 +25,9 @@
     <div class ="container" style="background-color: rgb(238, 238, 238)" id="bottomDiv">
         <h3>Previous Rounds:</h3>
         <div id="previousRounds"></div>
+        <ul id="myUL"></ul>
+        <button type ="button" onclick="resetPrevRounds()" class="intro-button-red" style="background-color: red" id="resetPrevRounds">Reset Previous Rounds</button>
+        <p class="text-danger" style="font-size: small;">WARNING: This is PERMANENT</p>
     </div>
 </body>
 </html>
@@ -40,31 +43,75 @@ function clearApp(){
     buttons.innerHTML = "";
     bottomStuff.innerHTML = "";
 }
+    // Click on a close button to hide the current list item
+    /*var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+        console.log(close.length)
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        console.log(div)
+        console.log(i)
+        //div.style.display = "none";
+        //console.log(div)
+        //localStorage.removeItem('Round'+ [i]);
+      }
+    }*/
 function displayPreviousRounds(){
-    //localStorage.getItem('Round')
-    //console.log("test")
-    console.log(localStorage.getItem('Round'))
-    console.log(localStorage.getItem('Round' + 1))
     let allScores = "";
     let previousRoundsDIV = document.getElementById("previousRounds");
     for(i=1;i<100;i++){
+        var myNodelist = document.getElementsByTagName("p");
+        var close = document.getElementsByClassName("close");
         if( localStorage.getItem('Round'+ [i]) != null ){
-            console.log("this")
-            //allScores += ("\n" + localStorage.getItem('Round' + [i])+ "\n")
-            let newRound = document.createElement("p");
-            console.log(newRound)
-            newRound.innerHTML = localStorage.getItem('Round' + [i]);
-            console.log(newRound)
-            previousRoundsDIV.appendChild(newRound);
-            //console.log(allScores)
+            //let newRound = document.createElement("p");
+            //newRound.innerHTML = localStorage.getItem('Round' + [i]);
+
+            //Add the round to the UL 
+            var li = document.createElement("li");
+            var inputValue = localStorage.getItem('Round' + [i]);
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            document.getElementById("myUL").appendChild(li);
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+            //previousRoundsDIV.appendChild(newRound);
+            console.log(close.length + " length of close pre for loop")
+            document.getElementById("myUL").appendChild(li);
+            for (j = 0; j < close.length; j++) {
+                console.log(close.length + " length of close")
+                console.log(j + " value of j")
+
+
+
+                close[j].onclick = function() {
+                    var roundDiv = this.parentElement;
+                    console.log(roundDiv.innerText);
+                    textToParse = roundDiv.innerText;
+                    roundToDelete = textToParse.slice(6,7)
+                    console.log(roundToDelete + "should return waht round number its grabbing ");
+                    console.log("Testing delete:" + "Round"+ roundToDelete);
+                    roundDiv.style.display = "none";
+                    localStorage.removeItem("Round"+ roundToDelete);
+                }
+            }
+            //document.getElementById("myUL").appendChild(li);
         }
         else{
-            //document.getElementById("previousRounds").innerHTML = newRound.innerHTML;
             return;
         }
     }
     console.log(allScores)
     document.getElementById("previousRounds").innerHTML = allScores;
+}
+function resetPrevRounds(){
+    console.log("Cleared.")
+    document.getElementById("previousRounds").innerHTML = "";
+    document.getElementById("myUL").innerHTML = "";
+    localStorage.clear();
 }
 
 function courseDellwood(){
@@ -315,12 +362,12 @@ function alertTotals(){
 
     function saveToStorage(){
         //add custom name have user search previous round? 
-        //user adds custom name added to key thing 
+        //user adds custom name added to key pairs 
         //for loop to check if round++ exists if it does add 1 if it still exists keep going 
         for(i=1; i<100; i++){
             if(localStorage.getItem('Round'+[i]) == null){
                 localStorage.setItem('Round' + [i],
-                "Course: " + decider + "\nStart Time: " + document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles)
+                "Round " + [i] +" - " + " Course: " + decider + "\nStart Time: " + document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles)
                 return;
             }
             else{
@@ -542,6 +589,21 @@ p{
     color: black;
     border-width: 4px;
     transition-duration: 0.4s;
+}
+
+/* Style the close button 
+    position: absolute;
+    right: 0;
+    top: 0;
+    */
+.close {
+  
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f44336;
+  color: white;
 }
 
 </style>
