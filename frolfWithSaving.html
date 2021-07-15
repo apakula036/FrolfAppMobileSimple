@@ -21,12 +21,13 @@
         <button type ="button" onclick="courseHighland()" class="intro-button-blue" id="highland">Highland</button>
         <button type ="button" onclick="courseTheOaks()" class="intro-button-green" id="theOaks">The Oaks</button>
         <button type ="button" onclick="courseHeritage()" class="intro-button-brown" id="heritage">Heritage</button>
+        <button type ="button" onclick="customCourse()" class="intro-button-red" id="customCourse" style="background-color:gold; color: black;">Custom!</button>
     </div> 
     <div class ="container" style="background-color: rgb(238, 238, 238)" id="bottomDiv">
         <h3>Previous Rounds:</h3>
         <div id="previousRounds"></div>
         <ul id="myUL"></ul>
-        <button type ="button" onclick="resetPrevRounds()" class="intro-button-red" style="background-color: red" id="resetPrevRounds">Reset Previous Rounds</button>
+        <button type ="button" onclick="resetPrevRounds()" class="intro-button-red" style="background-color: red; color: black; font-size: small" id="resetPrevRounds">Reset Previous Rounds</button>
         <p class="text-danger" style="font-size: small;">WARNING: This is PERMANENT</p>
     </div>
 </body>
@@ -43,20 +44,6 @@ function clearApp(){
     buttons.innerHTML = "";
     bottomStuff.innerHTML = "";
 }
-    // Click on a close button to hide the current list item
-    /*var close = document.getElementsByClassName("close");
-    var i;
-    for (i = 0; i < close.length; i++) {
-        console.log(close.length)
-      close[i].onclick = function() {
-        var div = this.parentElement;
-        console.log(div)
-        console.log(i)
-        //div.style.display = "none";
-        //console.log(div)
-        //localStorage.removeItem('Round'+ [i]);
-      }
-    }*/
 function displayPreviousRounds(){
     let allScores = "";
     let previousRoundsDIV = document.getElementById("previousRounds");
@@ -64,9 +51,6 @@ function displayPreviousRounds(){
         var myNodelist = document.getElementsByTagName("p");
         var close = document.getElementsByClassName("close");
         if( localStorage.getItem('Round'+ [i]) != null ){
-            //let newRound = document.createElement("p");
-            //newRound.innerHTML = localStorage.getItem('Round' + [i]);
-
             //Add the round to the UL 
             var li = document.createElement("li");
             var inputValue = localStorage.getItem('Round' + [i]);
@@ -78,27 +62,17 @@ function displayPreviousRounds(){
             span.className = "close";
             span.appendChild(txt);
             li.appendChild(span);
-            //previousRoundsDIV.appendChild(newRound);
-            console.log(close.length + " length of close pre for loop")
             document.getElementById("myUL").appendChild(li);
             for (j = 0; j < close.length; j++) {
-                console.log(close.length + " length of close")
-                console.log(j + " value of j")
-
-
 
                 close[j].onclick = function() {
                     var roundDiv = this.parentElement;
-                    console.log(roundDiv.innerText);
                     textToParse = roundDiv.innerText;
                     roundToDelete = textToParse.slice(6,7)
-                    console.log(roundToDelete + "should return waht round number its grabbing ");
-                    console.log("Testing delete:" + "Round"+ roundToDelete);
                     roundDiv.style.display = "none";
                     localStorage.removeItem("Round"+ roundToDelete);
                 }
             }
-            //document.getElementById("myUL").appendChild(li);
         }
         else{
             return;
