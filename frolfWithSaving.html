@@ -133,6 +133,28 @@ function courseHeritage(){
     createHoles(18);
     getEndTimerReady();
 }
+function customCourse(){
+    clearBody(); 
+    //clear whats on the screen already to make room for the course info 
+    clearApp();
+    //get the name and hole amount 
+    //getInformation();
+    let customName = prompt("Please enter the course name", "Custom Course");
+    let customHoleAmount = prompt("Please enter the course name", "18");
+    //console.log(customName + customHoleAmount);
+    //create the header of the course
+    createHeader(customName, "rgb(255, 102, 255)");
+    //create timer for course run 
+    getTimerReady();
+    //create inputs 
+    createHoles(customHoleAmount);
+    getEndTimerReady();
+}
+function getInformation(){
+    let customName = prompt("Please enter the course name", "Custom Course");
+    let customHoleAmount = prompt("Please enter the course name", "18");
+    return customName + customHoleAmount;
+}
 function createHoles(numberOfHoles){
     let bodyOfPage = document.getElementById("bodyOfPage");
     let newContainer = document.createElement("div");
@@ -166,9 +188,7 @@ function createHoles(numberOfHoles){
             } else {
                 newHole.setAttribute("style", "border-color: gray; width: 50px"); 
             }
-        }
-        //need a function here to save data to something like a json object 
-        //function is added here to each button dynamically and is used on click 
+        } 
         //newHole.addEventListener("change", updateStorage(newHole));
 
         //add buttons 
@@ -569,10 +589,13 @@ p{
     position: absolute;
     right: 0;
     top: 0;
+    padding: 12px 16px 12px 16px;
     */
 .close {
-  
-  padding: 12px 16px 12px 16px;
+    color:black;
+    position: inherit;
+    padding: 12px 16px 12px 16px;
+    background-color: coral;
 }
 
 .close:hover {
