@@ -36,6 +36,7 @@
 
 <script>
 displayPreviousRounds();
+
 function clearApp(){
     let frolfApp = document.getElementById("headerTitle");
     let buttons = document.getElementById("menuButtons");
@@ -140,14 +141,16 @@ function customCourse(){
     //get the name and hole amount 
     //getInformation();
     let customName = prompt("Please enter the course name", "Custom Course");
-    let customHoleAmount = prompt("Please enter the course name", "18");
+    let customHoleAmount = prompt("Please enter the number of holes", "18");
+    console.log(customHoleAmount);
     //console.log(customName + customHoleAmount);
     //create the header of the course
     createHeader(customName, "rgb(255, 102, 255)");
     //create timer for course run 
     getTimerReady();
     //create inputs 
-    createHoles(customHoleAmount);
+    var a = parseInt(customHoleAmount);
+    createHoles(a);
     getEndTimerReady();
 }
 function getInformation(){
@@ -182,6 +185,7 @@ function createHoles(numberOfHoles){
         //add event listener 
         newHole.addEventListener("change", currentHoleCompletedCheck);
         newHole.addEventListener("change", addTotal);
+
         function currentHoleCompletedCheck(){
             if(newHole.value == 0){
                 //newHole.setAttribute("style", "border-color: red; width: 50px; border-width: thick");
