@@ -381,6 +381,7 @@ function clearBody(){
 }
 function addTotal(){
     roundOverView();
+    createTableForOverview();
     //gets total hole count then loops through grabbing each by the ID which is the top of the totalholes 
     //and adds the .values for a total displayed when the user clicks end round OR the total scores button 
     let nameOfCourse = document.getElementById("headerOfPage").innerHTML;
@@ -421,12 +422,21 @@ function addTotal(){
     }
     
 }
-function createTableForOverview(arrayOfScores){
+/*
+function createTableForOverview(){
+    //roundOverView();
+    //arrayOfScores
     let bodyOfPage = document.getElementById("bodyOfPage");
     let table = document.createElement("table");
     let thead = table.createTHead();
     let row = thead.insertRow();
-}
+    for (i = 0+1; i < 18; i++){
+        let th = document.createElement("th");
+        let text = document.createTextNode("test");
+        th.appendChild(text);
+        row.appendChild(th);
+    }
+}*/
 function roundOverView(){
     let nameOfCourse = document.getElementById("headerOfPage").innerHTML;
     //fix this 
