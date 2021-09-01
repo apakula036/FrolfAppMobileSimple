@@ -174,7 +174,7 @@ function createHoles(numberOfHoles){
         labelForHole.setAttribute("style", "margin-bottom: 0; margin-left: 10px");
         //newContainer.appendChild(labelForHole);
         let newHole = document.createElement("input");
-        newHole.setAttribute("style", "border-color: blue; width: 50px; border-width: medium; border-style: solid; margin-left: 16px");
+        newHole.setAttribute("style", "border-color: blue; background-color: lightblue; font-size: 23px; width: 70px; height: 50px; border-width: thick; border-style: solid; margin-left: 16px;");
         newHole.setAttribute("id", i);
         newHole.setAttribute("class", "holescore"); 
         newHole.type = "number";
@@ -190,7 +190,7 @@ function createHoles(numberOfHoles){
             if(newHole.value == 0){
                 //newHole.setAttribute("style", "border-color: red; width: 50px; border-width: thick");
             } else {
-                newHole.setAttribute("style", "border-color: gray; width: 50px"); 
+                newHole.setAttribute("style", "border-color: gray; background-color: lightgray; font-size: 23px; width: 50px "); 
             }
         } 
         //newHole.addEventListener("change", updateStorage(newHole));
@@ -204,9 +204,9 @@ function createHoles(numberOfHoles){
             newHole.value++; 
             addTotal();
             if(newHole.value > 0 ){
-                newHole.setAttribute("style", "border-color: red; width: 50px; margin-left: 16px; background-color: lightred");
+                newHole.setAttribute("style", "border-color: red;  font-size: 23px; width: 70px; background-color: lightpink; height: 50px; margin-left: 16px");
             } else if (newHole.value == 0){
-                newHole.setAttribute("style", "border-color: gray; width: 50px; margin-left: 16px; background-color: lightred");
+                newHole.setAttribute("style", "border-color: gray; font-size: 23px; width: 70px; background-color: lightgray; height: 50px; margin-left: 16px");
             }
         });
         newContainer.appendChild(boge);
@@ -216,7 +216,7 @@ function createHoles(numberOfHoles){
         parScore.setAttribute("style", "background-color: #d9d9d9");
         parScore.innerHTML = "Par";
         parScore.addEventListener("click", function(){
-            newHole.setAttribute("style", "margin-left: 16px; border-color: gray; width: 50px");
+            newHole.setAttribute("style", "margin-left: 16px; border-color: gray; background-color: lightgray; font-size: 23px; width: 70px; height: 50px");
             newHole.value = 0;
             addTotal();
         });
@@ -230,9 +230,9 @@ function createHoles(numberOfHoles){
             newHole.value--; 
             addTotal();
             if(newHole.value < 0 ){
-                newHole.setAttribute("style", "margin-left: 16px; border-color: green; width: 50px");
+                newHole.setAttribute("style", "margin-left: 16px; font-size: 23px; background-color: lightgreen; border-color: green; width: 70px; height: 50px;");
             } else if (newHole.value == 0){
-                newHole.setAttribute("style", "margin-left: 16px; border-color: gray; width: 50px");
+                newHole.setAttribute("style", "margin-left: 16px; font-size: 23px; background-color: lightgray; border-color: gray; width: 70px; height: 50px;");
             }
         });
         newContainer.appendChild(birdieButt);
@@ -304,6 +304,7 @@ function getEndTimerReady() {
     endTimerButton.className = "end-round-button";
     endTimerButton.addEventListener("click", setStartTime);
     endTimerButton.addEventListener("click", alertTotals);
+    endTimerButton.addEventListener("click", roundOverView);
     endTimerButton.innerHTML = "End Round";
     //append all the things! 
     newDivForTimer.appendChild(theNewP);
@@ -319,11 +320,11 @@ function getEndTimerReady() {
     }
 }
 function alertTotals(){
-    let decider = document.getElementById("headerOfPage").innerHTML;
+    let nameOfCourse = document.getElementById("headerOfPage").innerHTML;
     let totalholes = 0;
-    if((decider == "Dellwood") || (decider == "Highland") || (decider == "Heritage")){
+    if((nameOfCourse == "Dellwood") || (nameOfCourse == "Highland") || (nameOfCourse == "Heritage")){
         totalHoles = 18;
-    } else if(decider = "The Oaks") {
+    } else if(nameOfCourse = "The Oaks") {
         totalHoles = 27; 
     } else {
          totalHoles = 18; 
@@ -365,7 +366,7 @@ function alertTotals(){
         for(i=1; i<100; i++){
             if(localStorage.getItem('Round'+[i]) == null){
                 localStorage.setItem('Round' + [i],
-                "Round " + [i] +" - " + " Course: " + decider + "\nStart Time: " + document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles)
+                "Round " + [i] +" - " + " Course: " + nameOfCourse + "\nStart Time: " + document.getElementById("startTimer").innerHTML + "\nEnd Time: " + document.getElementById("endTimer").innerHTML + "\nEnding Score: " + total + "\nTripleBs: "+ tripleBogeys + "\nDoubleBs: "+ doubleBogeys + "\nBoges: "+ bogeys + "\nPars: " + pars + "\nBurdees: " + birdies + "\nEagers: " + eagles)
                 return;
             }
             else{
@@ -379,13 +380,14 @@ function clearBody(){
     document.getElementById("bodyOfPage").setAttribute("style", "background-image: none");
 }
 function addTotal(){
+    roundOverView();
     //gets total hole count then loops through grabbing each by the ID which is the top of the totalholes 
     //and adds the .values for a total displayed when the user clicks end round OR the total scores button 
-    let decider = document.getElementById("headerOfPage").innerHTML;
+    let nameOfCourse = document.getElementById("headerOfPage").innerHTML;
     let totalholes = 0;
-    if((decider == "Dellwood") || (decider == "Highland") || (decider == "Heritage")){
+    if((nameOfCourse == "Dellwood") || (nameOfCourse == "Highland") || (nameOfCourse == "Heritage")){
         totalHoles = 18;
-    } else if(decider = "The Oaks") {
+    } else if(nameOfCourse = "The Oaks") {
         totalHoles = 27; 
     } else {
          totalHoles = 18; 
@@ -418,6 +420,35 @@ function addTotal(){
         document.getElementById("totalPlaceholder").innerHTML = "Current Score: " + total + " TripleBogeys: "+ tripleBogeys + " DoubleBogeys: "+ doubleBogeys+ " Bogies: "+ bogeys+" Pars: "+ pars+" Birdies: "+ birdies+" Eagles: "+ eagles; 
     }
     
+}
+function createTableForOverview(arrayOfScores){
+    let bodyOfPage = document.getElementById("bodyOfPage");
+    let table = document.createElement("table");
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+}
+function roundOverView(){
+    let nameOfCourse = document.getElementById("headerOfPage").innerHTML;
+    //fix this 
+        let totalholes = 0;
+        if((nameOfCourse == "Dellwood") || (nameOfCourse == "Highland") || (nameOfCourse == "Heritage")){
+            totalHoles = 18;
+        } else if(nameOfCourse = "The Oaks") {
+            totalHoles = 27; 
+        } else {
+            totalHoles = 18; 
+        }
+    let arrayOfScores = [];
+    for(i = 0+1; i < totalHoles+1; i++){
+        let holeScore = parseInt(document.getElementById(i).value);
+        console.log(holeScore);
+        //console.log("Hole: " + i +" Score: " + holeScore)
+        arrayOfScores.push(holeScore);
+        console.log(arrayOfScores);
+        //console.log(arrayOfScores.length);
+
+    }
+    return arrayOfScores;
 }
 </script>
 <style>
