@@ -112,6 +112,7 @@ function courseHighland(){
     //create inputs 
     createHoles(18);
     getEndTimerReady();
+    getOverviewTableReady(18);
 }
 function courseTheOaks(){
     clearBody(); 
@@ -123,6 +124,7 @@ function courseTheOaks(){
     //create inputs 
     createHoles(27);
     getEndTimerReady();
+    getOverviewTableReady(27);
 }
 function courseHeritage(){
     clearBody(); 
@@ -134,13 +136,13 @@ function courseHeritage(){
     //create inputs 
     createHoles(18);
     getEndTimerReady();
+    getOverviewTableReady(18);
 }
 function customCourse(){
     clearBody(); 
     //clear whats on the screen already to make room for the course info 
     clearApp();
     //get the name and hole amount 
-    //getInformation();
     let customName = prompt("Please enter the course name", "Custom Course");
     let customHoleAmount = prompt("Please enter the number of holes", "18");
     console.log(customHoleAmount);
@@ -153,12 +155,13 @@ function customCourse(){
     var a = parseInt(customHoleAmount);
     createHoles(a);
     getEndTimerReady();
+    getOverviewTableReady(a);
 }
-function getInformation(){
-    let customName = prompt("Please enter the course name", "Custom Course");
-    let customHoleAmount = prompt("Please enter the course name", "18");
-    return customName + customHoleAmount;
-}
+// function getInformation(){
+//     let customName = prompt("Please enter the course name", "Custom Course");
+//     let customHoleAmount = prompt("Please enter the course name", "18");
+//     return customName + customHoleAmount;
+// }
 function createHoles(numberOfHoles){
     let bodyOfPage = document.getElementById("bodyOfPage");
     let newContainer = document.createElement("div");
@@ -336,7 +339,7 @@ function alertTotals(){
     let totalholes = 0;
     if((nameOfCourse == "Dellwood") || (nameOfCourse == "Highland") || (nameOfCourse == "Heritage")){
         totalHoles = 18;
-    } else if(nameOfCourse = "The Oaks") {
+    } else if(nameOfCourse == "The Oaks") {
         totalHoles = 27; 
     } else {
          totalHoles = 18; 
@@ -398,7 +401,7 @@ function addTotal(){
     let totalholes = 0;
     if((nameOfCourse == "Dellwood") || (nameOfCourse == "Highland") || (nameOfCourse == "Heritage")){
         totalHoles = 18;
-    } else if(nameOfCourse = "The Oaks") {
+    } else if(nameOfCourse == "The Oaks") {
         totalHoles = 27; 
     } else {
          totalHoles = 18; 
