@@ -1,5 +1,5 @@
 #description
-A Frisbee Golf score keeper app that works on your phone or desktop when you open the frolfAppV2.html file. This app keeps track of when you start the round, end the round, and your score for the round as well as previous rounds through cookies.
+A Frisbee Golf score keeper app that works on your phone or desktop when you open the frolfAppV2.html file. This app keeps track of when you start the round, end the round, and your score for the round as well as previous rounds through cookies. This is programmed entirely in JavaScript with the HTML and CSS all tucked into one file for easy and convenient use. 
 
 
 #instructions
